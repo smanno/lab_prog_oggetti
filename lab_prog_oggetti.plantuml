@@ -2,32 +2,135 @@
 
 title __LAB_PROG_OGGETTI's Class Diagram__\n
 
-  namespace api_TrasportiLogistic {
-    class api_TrasportiLogistic.Luogo {
+  namespace  {
+    class Prenotazione {
     }
   }
   
 
-  namespace api_TrasportiLogistic {
-    class api_TrasportiLogistic.TipiStrada {
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.CallData {
+      }
     }
   }
   
 
-  namespace api_TrasportiLogistic {
-    class api_TrasportiLogistic.Tratta {
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.FileCloser {
+      }
     }
   }
   
 
-  namespace com.company {
-    class com.company.Main {
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.InvalidCallDataParameter {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.NotEnoughCreditException {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.Person {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.PhoneAdministration {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      enum Promotions {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_OperatoreTelefonico {
+      class api_OperatoreTelefonico.Sim {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.Automezzo {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.Luogo {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.Percorso {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.TipiStrada {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.Tratta {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace pi_TrasportiLogistic {
+      class api_TrasportiLogistic.Viaggio {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.company {
+      class com.company.Main {
+      }
     }
   }
   
 
   api_TrasportiLogistic.Tratta o-- api_TrasportiLogistic.Luogo : destinazione
   api_TrasportiLogistic.Tratta o-- api_TrasportiLogistic.Luogo : origine
+  api_TrasportiLogistic.Viaggio o-- api_TrasportiLogistic.Percorso : percorso
 
 
 right footer

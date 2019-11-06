@@ -1,12 +1,9 @@
 @startuml
 
-title __COMPANY's Class Diagram__\n
+title __SRC's Class Diagram__\n
 
   namespace  {
-    namespace om.company {
-      class com.company.Main {
-          {static} + main()
-      }
+    class Prenotazione {
     }
   }
   
