@@ -1,26 +1,21 @@
 package api_OperatoreTelefonico;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.time.Duration;
 
-@Getter @Setter
+@Setter @Getter
 class Sim {
-
     @NonNull private String number;
     @NonNull private Integer puk;
-
-    @Getter @Setter @NonNull private Double residual;
-    @NonNull private List<CallData> calls;
-    @NonNull private Date lastRechargeDate;
+    private Double residual;
+    private List<CallData> calls;
+    private Date lastRechargeDate;
     @NonNull private Person owner;
-    @NonNull private Promotions activePromo;
-    @NonNull private Boolean isOriginal;
+    private Promotions activePromo;
+    private Boolean isOriginal;
 
     // ECCEZIONE
 
@@ -54,7 +49,6 @@ class Sim {
         this.lastRechargeDate = new Date();
         this.isOriginal = false;
     }
-
 
     /**
      * Add a new data of a previous call to the list
@@ -94,7 +88,7 @@ class Sim {
      * @return true if original, false if ported
      */
     boolean isOriginal() {
-        return this.getOriginal();
+        return this.getIsOriginal();
     }
 
     // ECCEZIONE
