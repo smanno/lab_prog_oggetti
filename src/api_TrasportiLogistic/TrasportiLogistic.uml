@@ -3,8 +3,8 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="297.5" y="77.0">api_TrasportiLogistic.Tratta</node>
     <node x="175.0" y="428.0">api_TrasportiLogistic.TipiStrada</node>
+    <node x="297.5" y="77.0">api_TrasportiLogistic.Tratta</node>
     <node x="0.0" y="428.0">api_TrasportiLogistic.Prenotazione</node>
     <node x="0.0" y="289.0">api_TrasportiLogistic.Viaggio</node>
     <node x="336.0" y="428.0">api_TrasportiLogistic.Luogo</node>
@@ -30,7 +30,7 @@
     </note>
   </notes>
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="265.0" y="288.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="237.0" y="227.5" />
   <SelectedNodes>
     <node>api_TrasportiLogistic.Prenotazione</node>
   </SelectedNodes>
