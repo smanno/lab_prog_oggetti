@@ -1,7 +1,7 @@
 package api_TrasportiLogistic;
 
-public class Viaggio {
-    private Percorso percorso;
+public class Trip {
+    private Path percorso;
 
     public void CalcolaDurata() {
     }

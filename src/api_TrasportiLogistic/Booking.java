@@ -1,4 +1,4 @@
 package api_TrasportiLogistic;
 
-public class Prenotazione {
+public class Booking {
 }

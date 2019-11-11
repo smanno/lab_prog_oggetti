@@ -3,36 +3,20 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="175.0" y="428.0">api_TrasportiLogistic.TipiStrada</node>
-    <node x="297.5" y="77.0">api_TrasportiLogistic.Tratta</node>
-    <node x="0.0" y="428.0">api_TrasportiLogistic.Prenotazione</node>
-    <node x="0.0" y="289.0">api_TrasportiLogistic.Viaggio</node>
-    <node x="336.0" y="428.0">api_TrasportiLogistic.Luogo</node>
-    <node x="200.0" y="289.0">api_TrasportiLogistic.Automezzo</node>
-    <node x="0.0" y="128.0">api_TrasportiLogistic.Percorso</node>
+    <node x="0.0" y="416.0">api_TrasportiLogistic.TipiStrada</node>
+    <node x="238.0" y="344.0">api_TrasportiLogistic.Prenotazione</node>
+    <node x="0.0" y="205.0">api_TrasportiLogistic.Viaggio</node>
+    <node x="161.0" y="416.0">api_TrasportiLogistic.Location</node>
+    <node x="0.0" y="0.0">api_TrasportiLogistic.Path</node>
+    <node x="286.0" y="0.0">api_TrasportiLogistic.Leg</node>
+    <node x="0.0" y="344.0">api_TrasportiLogistic.TransportationManager</node>
+    <node x="200.0" y="205.0">api_TrasportiLogistic.Automezzo</node>
   </nodes>
-  <notes>
-    <note x="286.0" y="0.0">
-      <node>api_TrasportiLogistic.Tratta</node>
-      <value>origine =/= destinazione</value>
-      <edge>
-        <point x="0.0" y="-58.0" />
-        <point x="0.0" y="13.5" />
-      </edge>
-    </note>
-    <note x="16.0" y="0.0">
-      <node>api_TrasportiLogistic.Percorso</node>
-      <value>elencoTratte possono essere\n-ripetute\n-fare loop\n-devono essere concatenate</value>
-      <edge>
-        <point x="0.0" y="-58.0" />
-        <point x="0.0" y="39.0" />
-      </edge>
-    </note>
-  </notes>
+  <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="237.0" y="227.5" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="237.0" y="359.0" />
   <SelectedNodes>
-    <node>api_TrasportiLogistic.Prenotazione</node>
+    <node>api_TrasportiLogistic.TransportationManager</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

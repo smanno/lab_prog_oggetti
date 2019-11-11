@@ -82,7 +82,7 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
 
   namespace  {
     namespace pi_TrasportiLogistic {
-      class api_TrasportiLogistic.Luogo {
+      class api_TrasportiLogistic.Location {
       }
     }
   }
@@ -90,7 +90,7 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
 
   namespace  {
     namespace pi_TrasportiLogistic {
-      class api_TrasportiLogistic.Percorso {
+      class api_TrasportiLogistic.Path {
       }
     }
   }
@@ -106,7 +106,7 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
 
   namespace  {
     namespace pi_TrasportiLogistic {
-      class api_TrasportiLogistic.Tratta {
+      class api_TrasportiLogistic.Leg {
       }
     }
   }
@@ -114,7 +114,7 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
 
   namespace  {
     namespace pi_TrasportiLogistic {
-      class api_TrasportiLogistic.Viaggio {
+      class api_TrasportiLogistic.Trip {
       }
     }
   }
@@ -128,9 +128,9 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
   }
   
 
-  api_TrasportiLogistic.Tratta o-- api_TrasportiLogistic.Luogo : destinazione
-  api_TrasportiLogistic.Tratta o-- api_TrasportiLogistic.Luogo : origine
-  api_TrasportiLogistic.Viaggio o-- api_TrasportiLogistic.Percorso : percorso
+  api_TrasportiLogistic.Leg o-- api_TrasportiLogistic.Location : destinazione
+  api_TrasportiLogistic.Leg o-- api_TrasportiLogistic.Location : origine
+  api_TrasportiLogistic.Trip o-- api_TrasportiLogistic.Path : percorso
 
 
 right footer
