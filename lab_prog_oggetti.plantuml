@@ -74,7 +74,7 @@ title __LAB_PROG_OGGETTI's Class Diagram__\n
 
   namespace  {
     namespace pi_TrasportiLogistic {
-      class api_TrasportiLogistic.Automezzo {
+      class api_TrasportiLogistic.Truck {
       }
     }
   }
