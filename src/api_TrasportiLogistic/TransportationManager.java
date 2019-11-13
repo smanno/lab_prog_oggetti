@@ -1,5 +1,7 @@
 package api_TrasportiLogistic;
 
+import java.time.DateTimeException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -80,6 +82,7 @@ public class TransportationManager {
      * (ad esempio goods = colli e quantity = 1,2)
      * @throws InvalidDateException se arrival <= departure o nei festivi o incompatibili con durata del viaggio
      */
+
     Booking BookTripDeparting(LocalDateTime departure, GoodsKind goods, Double quantity, Location from, Location to)
             throws PathNotCoveredExcetption, NotTransportableException, InvalidDateException {
         // delega CreateTrip la creazione del viaggio e il controllo degli errori
@@ -121,18 +124,31 @@ public class TransportationManager {
          * nuovaPrenotazione = creare la prenotazione
          * aggiungi (nuovaPrenotazione) a elenco delle prenotazioni
          */
-        // in un ciclo a partire da arrival.minusHours(8) fino a now()
-            // se daparture.isBefore(now()) => eccezione
-            // delega CreateTrip la creazione del viaggio e il controllo degli errori
-            // TODO: 13/11/2019 try/catch
-            Booking newTrip = BookTrip(arrival.minusHours(8), goods, quantity, from, to);
-            // in caso di eccezione data/trasporto riprova con una partenza precedente (-8h)
-            // confronta viaggio prodotto se compatibile con arrival
-            // se non compatibile continua il ciclo
-            // se tutto ok esce dal ciclo
-        // se sono qui è tutto ok
-        // aggiungi newTrip a elenco delle prenotazioni
+        Duration tripDuration = GetTripDuration(from, to);
+        LocalDateTime departure = LocalDateTime.now();
+        // calcolo departure = arrival - tripDuration
+        // se daparture.isBefore(now()) => eccezione
+        // delega CreateTrip la creazione del viaggio e il controllo degli errori
+        // TODO: 13/11/2019 try/catch
+        Booking newTrip = BookTrip(departure, goods, quantity, from, to);
+        // se tutto ok aggiungi newTrip a elenco delle prenotazioni
         return newTrip;
+    }
+
+    /**
+     * @param from luogo di partenza
+     * @param to luogo di arrivo
+     * @return durata del percorso
+     * @throws PathNotCoveredExcetption non esiste tra i percorsi conosciuti
+     */
+    Duration GetTripDuration(Location from, Location to)
+            throws PathNotCoveredExcetption{
+        // valida from/to, in caso => eccezione
+        Duration tripDuration = Duration.ZERO;
+        // in un ciclo da leg.origin=from
+        // finchè leg.destination!=to
+            // tripDuration += leg.transitTime
+        return tripDuration;
     }
 
     /**
