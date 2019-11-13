@@ -1,6 +1,6 @@
 package api_TrasportiLogistic;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * PARTIRE DA QUESTA CLASSE, sopratutto all'esame, perchè è il nocciolo dell'esercizio
@@ -30,28 +30,36 @@ import java.util.Date;
 public class TransportationManager {
 
     /**
-     *
-     * @param arrival
-     * @param merce
-     * @param from
-     * @param to
-     */
-    BookTrip(Date arrival, TipoMerce merce, quantity, Location from, Location to){}
+     * crea una prenotazione, modifica le prenotazioni aggiungendola nell'elenco prenotazioni
 
-    /**
-     * crea una prenotazione, modifica le prenotazioni aggiungendo una prenotazione
-     * tranne:
-     * - non esiste un percorso che colleghi from e to
-     * - non ci sono autocarri liberi per quella merce
-     * - quantità merce eccessiva
-     * - arrival <= departure (tengo conto del tempo)
-     * - durata del viaggio non compatibile // departure + ETA > arrival
-     * - arrival/departue in date festive
-     * @param departure
-     * @param arrival
-     * @param merce
-     * @param from
-     * @param to
+     * @param departure data di partenza desiderata
+     * @param arrival data di arrivo desiderata
+     * @param goods tipo di merce
+     * @param quantity quantità di merce a seconda del tipo (peso, volume, quantità colli)
+     * @param from luogo di partenza della merce
+     * @param to luogo di arrivo della merce
+     *
+     * @return una nuova prenotazione
+     *
+     * @throws PathNotCoveredExcetption non esiste un percorso che collega from e to
+     * @throws NotTransportableException non abbiamo autocarri disponibili o la quantità di merce non è trasportabile
+     * (ad esempio goods = colli e quantity = 1,2)
+     * @throws InvalidDateException se arrival <= departure o nei festivi o incompatibili con durata del viaggio
      */
-    BookTrip(Date departure, Date arrival, TipoMerce merce, quantity, Location from, Location to){}
+    Booking BookTrip(LocalDateTime departure, LocalDateTime arrival, GoodsKind goods, Double quantity, Location from, Location to)
+            throws PathNotCoveredExcetption, NotTransportableException, InvalidDateException {
+        /**
+         * valida date
+         * valida tipo/quantità merce
+         * cerca i percorsi che collegano from e to // scegli quello ottimale
+         * se non c'è => eccezione
+         * se durata p incompatibile con le date => eccezione
+         * flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)
+         * se non trovo nulla => eccezione
+         *
+         * nuovaPrenotazione = creare la prenotazione
+         * aggiungi (nuovaPrenotazione) a elenco delle prenotazioni
+         */
+        return null;
+    }
 }
