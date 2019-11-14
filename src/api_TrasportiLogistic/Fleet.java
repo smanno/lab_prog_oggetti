@@ -1,9 +1,18 @@
 package api_TrasportiLogistic;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
+/**
+ * STATO ASTRATTO
+ * insieme di autocarri senza duplicati
+ */
 public class Fleet {
+
+    Set<Truck> theTrucks = new TreeSet<>();
+
+    // INVARIANTE
+    // theTrucks non è NULL
 
     /**
      * Trova i camion che possono essere usati per il viaggio

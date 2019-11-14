@@ -1,5 +1,10 @@
 package api_TrasportiLogistic;
 
+/**
+ * STATO ASTRATTO
+ * contenitore di Path tutti diversi tra loro
+ * possono avere stessa origine e destinazione
+ */
 public class PathRegister {
 
     /**
