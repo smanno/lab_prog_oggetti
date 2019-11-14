@@ -3,17 +3,16 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="205.0">api_TrasportiLogistic.GoodsKind</node>
-    <node x="390.0" y="503.0">api_TrasportiLogistic.Booking</node>
-    <node x="243.0" y="503.0">api_TrasportiLogistic.Location</node>
-    <node x="0.0" y="0.0">api_TrasportiLogistic.Path</node>
-    <node x="286.0" y="0.0">api_TrasportiLogistic.Leg</node>
-    <node x="0.0" y="365.0">api_TrasportiLogistic.TransportationManager</node>
-    <node x="0.0" y="503.0">api_TrasportiLogistic.Automezzo</node>
+    <node x="286.0" y="293.0">api_TrasportiLogistic.GoodsKind</node>
+    <node x="0.0" y="520.0">api_TrasportiLogistic.Booking</node>
+    <node x="556.0" y="520.0">api_TrasportiLogistic.Location</node>
+    <node x="0.0" y="293.0">api_TrasportiLogistic.Path</node>
+    <node x="440.0" y="293.0">api_TrasportiLogistic.Leg</node>
+    <node x="0.0" y="0.0">api_TrasportiLogistic.TransportationManager</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="237.0" y="160.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="185.5" y="275.5" />
   <SelectedNodes>
     <node>api_TrasportiLogistic.Booking</node>
   </SelectedNodes>

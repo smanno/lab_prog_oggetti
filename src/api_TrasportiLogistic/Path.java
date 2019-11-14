@@ -75,4 +75,11 @@ public class Path {
 
     public void CalcolaDistanza() {
     }
+
+    /**
+     * calcola la durata come somma della durata delle tratte
+     * @return
+     */
+    public long computeDuration() {
+    }
 }

@@ -11,9 +11,9 @@ import java.util.List;
  *
  * è MUTABILE perchè mantiene un elenco di viaggi/prenotazioni/percorsi *
  * ---Caratterizzato da:
- * elenco percorsi
- * elenco prenotazioni
- * flotta
+ * elenco percorsi      non vuoto, ogni percorso è valido
+ * elenco prenotazioni  può essere vuoto
+ * flotta               con almeno un camion per tipo
  * // cliente // non richiesto dall'esercizio
  * // alla API non serve un utente (a meno che non sia richiesta un'autorizzazione <= situazione rara)
  *
@@ -31,9 +31,19 @@ import java.util.List;
  * tm.Reroute(Trip trip)            MODIFIER
  */
 public class TransportationManager {
-    private List<Path> elencoPercorsi;
-    private List<Booking> elencoPrenotazioni;
-    private List<Truck> flotta;
+
+    // funzione di astrazione ovvia
+    private PathRegister elencoPercorsi;
+    private BookingRegister elencoPrenotazioni;
+    private Fleet flotta;
+
+    // INVARIANTE
+    /**
+     * ciascuna variabile di istanza =/= NULL
+     * Invariante dopo initialise();
+     * elencoPercorsi: 1+ Path
+     * flotta: 1+ Truck
+     */
 
     /**
      * crea una prenotazione a partire dalla data di PARTENZA
@@ -51,18 +61,28 @@ public class TransportationManager {
      * (ad esempio goods = colli e quantity = 1,2)
      * @throws InvalidDateException se arrival <= departure o nei festivi o incompatibili con durata del viaggio
      */
-    Booking BookTrip(LocalDateTime departure, GoodsKind goods, Double quantity, Location from, Location to)
+    private Booking BookTrip(LocalDateTime departure, GoodsKind goods, Double quantity, Location from, Location to)
             throws PathNotCoveredExcetption, NotTransportableException, InvalidDateException {
-        /**
-         * valida date
-         * se festivo o departure.before(now) => eccezione
-         * valida tipo/quantità merce
-         * cerca i percorsi che collegano from e to // scegli quello ottimale
-         * se non c'è => eccezione
-         * flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)
-         * se non trovo nulla => eccezione
-         */
-        return null;
+
+        // valida tipo/quantità merce
+        ValidateGoods(goods, quantity);
+        // cerca i percorsi che collegano from e to // scegli quello ottimale
+        Path aPath = elencoPercorsi.findPath(from, to);
+        long durationMinutes = aPath.computeDuration();
+        LocalDateTime arrival = departure+durationMinutes;
+        // valida le date
+        ValidateTripDates(departure, arrival, durationMinutes);
+        // flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)
+        List<Truck> possibleTrucks = flotta.findTrucks(departure, goods, quantity)
+        // TODO: 14/11/2019 considerare il fatto che la posizione del camion non coincida con from
+        if(possibleTrucks.isEmpty()){
+            throw new NotTransportableException("Non ci sono autocarri");
+        }
+        Truck chosenTruck = possibleTrucks.get(0);
+        // creo la prenotazione
+        Booking newBooking = new Booking(departure,arrival,goods,quantity,from,to,chosenTruck);
+        elencoPrenotazioni.add(newBooking);
+        return newBooking;
     }
 
     /**
@@ -83,7 +103,7 @@ public class TransportationManager {
      * @throws InvalidDateException se arrival <= departure o nei festivi o incompatibili con durata del viaggio
      */
 
-    Booking BookTripDeparting(LocalDateTime departure, GoodsKind goods, Double quantity, Location from, Location to)
+    public Booking BookTripDeparting(LocalDateTime departure, GoodsKind goods, Double quantity, Location from, Location to)
             throws PathNotCoveredExcetption, NotTransportableException, InvalidDateException {
         // delega CreateTrip la creazione del viaggio e il controllo degli errori
         // TODO: 13/11/2019 try/catch
@@ -107,23 +127,10 @@ public class TransportationManager {
      * @throws PathNotCoveredExcetption non esiste un percorso che collega from e to
      * @throws NotTransportableException non abbiamo autocarri disponibili o la quantità di merce non è trasportabile
      * (ad esempio goods = colli e quantity = 1,2)
-     * @throws InvalidDateException se arrival <= departure o nei festivi o incompatibili con durata del viaggio
+     * @throws InvalidDateException se departure.before(now()) nei festivi
      */
-    Booking BookTripArriving(LocalDateTime arrival, GoodsKind goods, Double quantity, Location from, Location to)
+    public Booking BookTripArriving(LocalDateTime arrival, GoodsKind goods, Double quantity, Location from, Location to)
             throws PathNotCoveredExcetption, NotTransportableException, InvalidDateException {
-        /**
-         * valida data
-         * valida tipo/quantità merce
-         * cerca i percorsi che collegano from e to // scegli quello ottimale
-         * se non c'è => eccezione
-         * se durata percorso incompatibile con le date => eccezione
-         * flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)
-         * se non trovo nulla => prova una partenza successi
-         * se non trovo nulla => eccezione
-         *
-         * nuovaPrenotazione = creare la prenotazione
-         * aggiungi (nuovaPrenotazione) a elenco delle prenotazioni
-         */
         Duration tripDuration = GetTripDuration(from, to);
         LocalDateTime departure = LocalDateTime.now();
         // calcolo departure = arrival - tripDuration
@@ -133,6 +140,31 @@ public class TransportationManager {
         Booking newTrip = BookTrip(departure, goods, quantity, from, to);
         // se tutto ok aggiungi newTrip a elenco delle prenotazioni
         return newTrip;
+    }
+
+    /**
+     * controlla due date:
+     *  non devono essere NULL
+     *  arrival.after(departure)
+     *  departure.after(now())
+     *  non devono essere festivi     *
+     * @param departure data di partenza
+     * @param arrival data di arrivo
+     * @param durationMinutes durata prevista del viaggio
+     * @throws InvalidDateException se una delle condizione è violata
+     */
+    private void ValidateTripDates(LocalDateTime departure, LocalDateTime arrival, long durationMinutes)
+            throws InvalidDateException{
+    }
+
+    /**
+     * verifica merce e quantità
+     * @param goods
+     * @param quantity
+     * @throws NotTransportableException
+     */
+    private void ValidateGoods(GoodsKind goods, double quantity)
+            throws NotTransportableException{
     }
 
     /**
