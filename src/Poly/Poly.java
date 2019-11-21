@@ -27,7 +27,7 @@ public class Poly {
         /**
          * Copy constructor
          *
-         * @param cpe: REQUIRE not null
+         * @param ce: REQUIRE not null
          */
         PolynomialTerm(PolynomialTerm ce) {
             ce = Objects.requireNonNull(ce);
