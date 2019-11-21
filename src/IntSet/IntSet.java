@@ -1,72 +1,62 @@
 package IntSet;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Vector;
 
 public class IntSet {
     /**
-     * This class provides an ADT for sets of int. IntSet is mutable, unbounded.
-     * Class overview: public IntSet() public IntSet(int [] elts) public
-     * IntSet(IntSet s) public void insert(int x) public boolean remove(int x)
-     * public boolean isIn(int x) private int indexOf(Integer x) public int choose()
-     * throws EmptyIntSetException public boolean sameValues(IntSet s2)
+     * MISSION This class provides an ADT for sets of int. IntSet is mutable,
+     * unbounded.
      */
     /**
-     * ABSTRACTION FUNCTION: the set is constituted by all the integers that are
-     * represented in this.elements. Elements is not sorted. INVARIANT elements !=
-     * null & elements contains no duplicates & elements contains boxed int
-     * (Integer).
+     * ABSTRACTION FUNCTION: the set is represented by the items in this.elements
+     *
+     * INVARIANT elements != null & elements contains no duplicates & elements
+     * contains boxed int (Integer). Elements is not sorted.
      */
     private Vector<Integer> elements;
 
-    /**
-     * EFFECT; initialize this to a new set, empty.
-     */
+    /** EFFECT; initialize this to a new set, empty. */
     public IntSet() {
         this.elements = new Vector<Integer>();
     }
 
-    /** @param: elts, the int's to be added to the set
-     * EFFECT initialize this to a new set, which contains each element
-     * of elts; duplicated elements are not considered.
-     * @throws NullPointerException if elts is null
+    /**
+     * @param: elts. REQUIRE be not null. EFFECT initialize this to a new set, which
+     *         contains each element of elts; duplicated elements are not
+     *         considered.
      */
-    public IntSet(int [] elts){
-        if (elts == null){
-            throw new NullPointerException("elts should not be null");
-        }
+    public IntSet(int[] elts) {
         this.elements = new Vector<Integer>();
-        for (int x:elts){
+        Objects.requireNonNull(elts);
+        for (int x : elts) {
             Integer y = new Integer(x);
-            if (!this.elements.contains(y)){
+            if (!this.elements.contains(y)) {
                 this.elements.addElement(y);
             }
         }
     }
 
     /**
-     * Copy constructor.
+     * Copy constructor. EFFECT initialize this to a new set that contains all and
+     * only the elements of s.
      *
-     * @param s: a set to be duplicated EFFECT initialize this to a new set that
-     *        contains all and only the elements of s.
-     * @throws NullPointerException if s is null
+     * @param s: a set to be duplicated. REQUIRE not null.
      */
     @SuppressWarnings("unchecked")
     public IntSet(IntSet s) {
-        if (s == null) {
-            throw new NullPointerException("s should not be null");
-        }
+        Objects.requireNonNull(s);
         this.elements = (Vector<Integer>) s.elements.clone();
     }
 
     /**
-     * MUTATOR
-     * MODIFY this: x is added to this set if x is not present
+     * insert x in this MODIFY this: x is added to this set if x is not present
      */
     public void insert(int x) {
-        Objects.requireNonNull(this.elements);
         Integer y = new Integer(x);
         if (!this.elements.contains(y)) {
             this.elements.addElement(y);
@@ -75,13 +65,11 @@ public class IntSet {
     }
 
     /**
-     * MUTATOR
-     * MODIFY this: x is removed from this set if x is present
+     * remove x from this MODIFY this: x is removed to this set if x is present
      *
      * @return: true if x was removed
      */
     public boolean remove(int x) {
-        Objects.requireNonNull(this.elements);
         Integer y = new Integer(x);
         boolean res = this.elements.remove(y);
         assert (!this.elements.contains(y));
@@ -89,12 +77,11 @@ public class IntSet {
     }
 
     /**
-     * OBSERVER
+     * check if x belongs to this
+     *
      * @return: true if x is present in this
      */
     public boolean isIn(int x) {
-
-        Objects.requireNonNull(this.elements);
         Integer y = new Integer(x);
         int i = this.indexOf(y);
         boolean res = (i >= 0);
@@ -103,12 +90,10 @@ public class IntSet {
     }
 
     /**
-     * OBSERVER
      * @return: the index of x if it is present in this ; return -1 if not present
      */
-    private int indexOf(int z) {
-        Objects.requireNonNull(this.elements);
-        Integer x = new Integer(z);
+    private int indexOf(Integer x) {
+        assert (this.elements != null);
         for (int i = 0; i < this.elements.size(); i++) {
             if (this.elements.get(i).equals(x)) {
                 return (i);
@@ -118,21 +103,21 @@ public class IntSet {
     }
 
     /**
-     * OBSERVER
+     * cardinality of this
+     *
      * @return: the number of elements in this
      */
     public long size() {
-        Objects.requireNonNull(this.elements);
         return (this.elements.size());
     }
 
     /**
-     * OBSERVER
+     * choose an element of this
+     *
      * @return: a random element in this
      * @throws: EmptyIntSetException if this is empty
      */
     public int choose() throws EmptyIntSetException {
-        Objects.requireNonNull(this.elements);
         if (this.elements.isEmpty()) {
             throw new EmptyIntSetException();
         }
@@ -142,20 +127,96 @@ public class IntSet {
     }
 
     /**
-     * OBSERVER
-     * @param s2: the set to be compared to this
-     * @return true if this and s2 contain the same set of int MODIFY this and s2 by
-     *         sorting their elements 3
-     * @throws NullPointerException if s2 is null
+     * @param s2: REQUIRE not null
+     * @return true if this and s2 contain the same set of int
      */
     public boolean sameValues(IntSet s2) {
-        Objects.requireNonNull(this.elements);
-        if (s2 == null) {
-            throw new NullPointerException("s2 should not be null");
-        }
+        Objects.requireNonNull(s2);
         Collections.sort(this.elements);// BEWARE integers are moved
         Collections.sort(s2.elements);
         boolean res = this.elements.equals(s2.elements);
         return (res);
+    }
+
+    /**
+     * @return a standard iterator over the Integers of this set. The iterator is
+     *         not sensible to mutations of this set.
+     * RESULT non è dello stesso tipo della funzione, ma è un interfaccia quindi viene accettato
+     */
+    public Iterator<Integer> iterator() {
+        assert (this.elements != null);
+        IntSetIterator result = new IntSetIterator(this);
+        return ((Iterator<Integer>) result);
+    }
+
+    /**
+     * =============================================
+     * INNER CLASS for generic iterator
+     * =============================================
+     */
+    /**
+     * MISSION is to provide an iterator over the elements of an IntSet. Once the
+     * iterator is created, if the original set changes the iterator continues to
+     * work on the original copy.
+     */
+    private class IntSetIterator implements Iterator<Integer> {
+        /**
+         * INVARIANT elements contains a copy of the elements of the IntSet when this
+         * iterator is created. current is the integer i such that elements[i] is the
+         * first of the elements not yet returned. current==elements.size if we explored
+         * all of them.
+         */
+        private int minValue;
+        private int current;
+        final private Vector<Integer> elements;
+
+        /**
+         * @param s an IntSet REQUIRE not null Initialize the iterator with the size of
+         *          the vector and with current index=0, and store a copy of the
+         *          elements.
+         */
+        @SuppressWarnings("unchecked")
+        IntSetIterator(IntSet s) {
+            Objects.requireNonNull(s);
+            this.elements = (Vector<Integer>) s.elements.clone();
+            this.elements.sort(null); // ordina gli elementi, null basta per dei numeri
+            this.current = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (this.current < this.elements.size());
+        }
+
+        // TODO: 21/11/2019 controllare
+        private void updateMinValue(){
+            int minimum = elements.get(0);
+            for(int i=0; i<elements.size(); i++){
+                if(elements.get(i)<minimum){
+                    minimum =  elements.get(i);
+                    if(minimum>minValue){
+                        minValue=minimum;
+                    }
+                }
+            }
+        }
+
+        @Override
+        public Integer next() {
+            if (this.current < this.elements.size()) {
+                //updateMinValue();
+                Integer res = this.elements.get((int) this.current);
+                this.current++;
+                return (res);
+                //return minValue;
+            } else {
+                throw new NoSuchElementException("Went beyond the available values");
+            }
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
