@@ -84,6 +84,10 @@ public class AlbumQuery {
 
 /**
  * stream
- * foreach
- * map
+ * filter
+ * foreach // lavorare su ogni elemento
+ * map // ridurre ad un unico attributo
+ * collect // costruisceuna lista con i superstiti
+ *
+ * andrea.bidinost.mail@gmail.com
  */
