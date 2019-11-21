@@ -1,6 +1,8 @@
 package Poly;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -25,7 +27,7 @@ public class Poly {
         /**
          * Copy constructor
          *
-         * @param ce: REQUIRE not null
+         * @param cpe: REQUIRE not null
          */
         PolynomialTerm(PolynomialTerm ce) {
             ce = Objects.requireNonNull(ce);
@@ -71,7 +73,8 @@ public class Poly {
      */
     public Poly(Poly p) {
         terms = new Vector<PolynomialTerm>();
-        for(PolynomialTerm pt:p.terms){
+
+        for (PolynomialTerm pt : p.terms) {
             PolynomialTerm newTerm = new PolynomialTerm(pt);
             terms.add(newTerm);
         }
@@ -79,16 +82,20 @@ public class Poly {
 
     /**
      * PRODUCER
+     *
      * @param p: the poly to be added to this; REQUIRE not null.
      * @return a new poly that is this+p
      */
     public Poly add(Poly p) {
         Poly newPoly = new Poly();
-        int newDegree = Math.max(p.degree(),this.degree());
-        for(int i=0; i<=newDegree; i++){
+        int newDegree = Math.max(p.degree(), this.degree());
+
+        for (int i = 0; i <= newDegree; i++) {
+
             int newCoefficient = p.coefficient(i) + this.coefficient(i);
-            if(newCoefficient!=0) {
-                PolynomialTerm newTerm = new PolynomialTerm(newCoefficient,i);
+
+            if (newCoefficient != 0) {
+                PolynomialTerm newTerm = new PolynomialTerm(newCoefficient, i);
                 newPoly.terms.add(newTerm);
             }
         }
@@ -132,36 +139,41 @@ public class Poly {
     }
 
     /**
-     * PRODUCER
      * @return the poly -(this)
      */
     public Poly minus() {
         Poly newPoly = new Poly();
-        for(PolynomialTerm term:this.terms){
+
+        for (PolynomialTerm term : this.terms) {
             PolynomialTerm newTerm = new PolynomialTerm(-term.coeff, term.exponent);
             newPoly.terms.add(newTerm);
         }
+
         return newPoly;
     }
 
     /**
      * PRODUCER
+     *
      * @param p: the poly to be multiplied to this; REQUIRE not null.
      * @return a new poly that is this*p
      */
     public Poly mul(Poly p) {
         Poly newPoly = new Poly();
-        for(int i=0; i<=p.degree(); i++){
-            for(int j=0; j<=degree(); j++){
+
+        for (int i = 0; i <= p.degree(); i++) {
+            for (int j = 0; j <= degree(); j++) {
                 int actualCoeff = coefficient(j);
                 int otherCoeff = p.coefficient(i);
-                int newCoeff = actualCoeff*otherCoeff;
-                if(newCoeff!=0){
-                    PolynomialTerm newTerm = new PolynomialTerm(newCoeff, i+j);
+
+                int newCoeff = actualCoeff * otherCoeff;
+                if (newCoeff != 0) {
+                    PolynomialTerm newTerm = new PolynomialTerm(newCoeff, i + j);
                     newPoly.terms.add(newTerm);
                 }
             }
         }
+
         return newPoly;
     }
 
@@ -175,4 +187,54 @@ public class Poly {
         }
         return (s.toString());
     }
+
+    // produce un iteratore sul polinomio this
+    // che consente di "estrarre" i singoli termini di this
+    // che hanno coefficiente diverso da 0
+    // ad es. se it e' un tale iteratore su 2x^3+4x^6 allora
+    // it.next() -> 2x^3
+    // it.next() -> 4x^6
+    public Iterator<Poly> termIterator(){
+        List<Poly> nonZeroTerms = new ArrayList<Poly>();
+
+        try {
+            for(PolynomialTerm term:this.terms){
+                if(term.coeff!=0){
+                    Poly newPoly = new Poly(term.coeff, term.exponent);
+                    nonZeroTerms.add(newPoly);
+                }
+            }
+        } catch (NegativeExponentException nee){
+            assert false : "this cannot happen";
+        }
+
+        return nonZeroTerms.iterator();
+    }
+
+    /**
+     * @param p not null
+     * @return the result of symbolic differentiation of a poly
+     * @Throws NullPointerException if p==null
+     */
+    static public Poly differentiate (Poly p) {
+        Objects.requireNonNull(p);
+        Poly q = new Poly();
+        try {
+            Iterator<Poly> startingIterator = p.termIterator();
+            while (startingIterator.hasNext()){
+                Poly oldTerm = startingIterator.next();
+                int oldDegree = oldTerm.degree();
+                if(oldDegree!=0) {
+                    int oldCoeff = oldTerm.coefficient(oldDegree);
+                    Poly derivatedTerm = new Poly(oldCoeff * oldDegree, oldDegree - 1);
+                    q.add(derivatedTerm);
+                }
+            }
+
+        } catch (NegativeExponentException nee){
+            assert false : "this cannot happen";
+        }
+        return(q);
+    }
+
 }
