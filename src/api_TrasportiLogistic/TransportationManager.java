@@ -73,7 +73,7 @@ public class TransportationManager {
         // valida le date
         ValidateTripDates(departure, arrival, durationMinutes);
         // flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)
-        List<Truck> possibleTrucks = flotta.findTrucks(departure, goods, quantity)
+        List<Truck> possibleTrucks = flotta.findTrucks(departure, goods, quantity);
         // TODO: 14/11/2019 considerare il fatto che la posizione del camion non coincida con from
         if(possibleTrucks.isEmpty()){
             throw new NotTransportableException("Non ci sono autocarri");
