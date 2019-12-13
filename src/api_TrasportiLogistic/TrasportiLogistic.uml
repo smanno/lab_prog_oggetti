@@ -12,10 +12,8 @@
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="185.5" y="275.5" />
-  <SelectedNodes>
-    <node>api_TrasportiLogistic.Booking</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="1.0" x="783.5" y="321.5" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>

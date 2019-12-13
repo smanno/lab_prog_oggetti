@@ -14,8 +14,11 @@ public class Scarpa extends Merce{
     private String modello;
     private List<Color> colori;
 
-    // TODO: 12/12/2019 builder
-    Scarpa(Integer codice, Double altezza, Double larghezza, Double profondita, Double peso, Date dataStoccaggio, TipiMerce tipologia, List<Misura> misure, Double prezzo) {
-        super(codice, altezza, larghezza, profondita, peso, dataStoccaggio, tipologia, misure, prezzo);
+    @Builder
+    Scarpa(Integer codice, Double altezza, Double larghezza, Double profondita, Double peso, Date dataStoccaggio, List<Misura> misure, Double prezzo, String marca, String modello, List<Color> colori) {
+        super(codice, altezza, larghezza, profondita, peso, dataStoccaggio, TipiMerce.scarpa, misure, prezzo);
+        this.setColori(colori);
+        this.setMarca(marca);
+        this.setModello(modello);
     }
 }
