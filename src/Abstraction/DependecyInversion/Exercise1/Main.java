@@ -1,7 +1,5 @@
 package Abstraction.DependecyInversion.Exercise1;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 public class Main {

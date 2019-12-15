@@ -1,8 +1,5 @@
 package Abstraction.DependecyInversion.Exercise1;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
 import java.time.LocalDate;
 
 /**

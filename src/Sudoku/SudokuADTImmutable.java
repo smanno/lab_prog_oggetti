@@ -60,10 +60,12 @@ public class SudokuADTImmutable {
 
     private boolean CheckIfSolvable(){
         // controllo se il sudoku è risolvibile
+        return true;
     }
 
     private boolean CheckIfSolved(){
         // controllo se il sudoku è risolto
+        return true;
     }
 
     /**

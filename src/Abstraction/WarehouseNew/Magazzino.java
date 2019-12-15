@@ -1,22 +1,30 @@
 package Abstraction.WarehouseNew;
 
-import lombok.Builder;
-import lombok.Getter;
+import org.apache.http.client.ClientProtocolException;
+import java.io.IOException;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-@Builder
 public class Magazzino {
     private List<Merce> merci;
-    @Getter
     private Double capienzaMassima;
     private Double latitudine, longitudine;
     private GeneratoreDiCodice codificatore;
-    // TODO: 12/12/2019 volume scaffali
+    private Misura volumeScaffali;
 
-    public Integer numeroScarpe(){ // assert in fase di produzione, eccezione no perchè capita n magazzino vuoto
+    public Magazzino(List<Merce> m, Double capienza, Double lat, Double lon, Double scaffali) {
+        merci = m;
+        capienzaMassima = capienza;
+        latitudine = lat;
+        longitudine = lon;
+        codificatore = new GeneratoreDiCodice();
+        volumeScaffali = new Misura(TipoMisura.mCubi, scaffali);
+    }
+
+    public Double fornisciCapienzaMassima() {
+        return capienzaMassima;
+    }
+
+    public Integer numeroMerci(){ // assert in fase di produzione, eccezione no perchè capita n magazzino vuoto
         if(merci!=null) {
             return merci.size();
         } else {
@@ -25,11 +33,11 @@ public class Magazzino {
     }
 
     public Double totaleVolume(){
-        return merci.stream().mapToDouble(scarpa -> scarpa.fornisciVolume()).sum()+volume;
+        return merci.stream().mapToDouble(elemento -> elemento.fornisciVolume()).sum()+volumeScaffali.getValore();
     }
 
     public Double totalePeso(){
-        return merci.stream().mapToDouble(scarpa -> scarpa.getPeso()).sum();
+        return merci.stream().mapToDouble(elemento -> elemento.getPeso()).sum();
     }
 
     public void aggiungiMerce(Merce nuovaMerce){
@@ -38,7 +46,7 @@ public class Magazzino {
         merci.add(nuovaMerce);
     }
 
-    public void rimuoviScarpa(Merce vecchiaMerce){
+    public void rimuoviMerce(Merce vecchiaMerce){
         merci.remove(vecchiaMerce); // usa equals
     }
 
@@ -55,10 +63,24 @@ public class Magazzino {
         return new ArrayList<Double>(Arrays.asList(latitudine, longitudine));
     }
 
-    void inviaInfo(String url){
+    void inviaInfo(String url){ // "http://www.a-domain.com/foo/"
         Inviatore inviatore = new Inviatore();
+
         Double pct = totaleVolume() / capienzaMassima;
-        String parametro = "locazione: ("+latitudine+", "+longitudine+")"+"; percentuale: "+pct+"%; numero merci: "+merci.size();
-        inviatore.invia(url,parametro);
+        Map<String, String> parametri = new HashMap<String, String>();
+
+        parametri.put("locazione", "("+latitudine + ", " + longitudine+")");
+        parametri.put("percentuale", pct.toString());
+        parametri.put("numero merci", String.valueOf(merci.size()));
+
+        try {
+            inviatore.invia(url, parametri);
+        } catch (ClientProtocolException e) {
+            //scrivo in un log
+            e.printStackTrace();
+        } catch (IOException e) {
+            //scrivo in un log
+            e.printStackTrace();
+        }
     }
 }

@@ -37,8 +37,8 @@ public class Store {
     /**
      * @return the employee that works in this stor from more years than
      */
-    Employee getMoreTimeEmployee() {
-        Employee result = null;
+    IEmployee getMoreTimeEmployee() {
+        IEmployee result = null;
         for(IEmployee em: employees) {
             if(result == null) {
                 result = em;

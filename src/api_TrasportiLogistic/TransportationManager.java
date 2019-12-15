@@ -1,6 +1,5 @@
 package api_TrasportiLogistic;
 
-import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -69,7 +68,7 @@ public class TransportationManager {
         // cerca i percorsi che collegano from e to // scegli quello ottimale
         Path aPath = elencoPercorsi.findPath(from, to);
         long durationMinutes = aPath.computeDuration();
-        LocalDateTime arrival = departure+durationMinutes;
+        LocalDateTime arrival = null;//departure+durationMinutes
         // valida le date
         ValidateTripDates(departure, arrival, durationMinutes);
         // flottaNecessaria = cerca quanti e quali automezzi ci servono (goods, quantity)

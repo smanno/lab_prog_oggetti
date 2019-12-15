@@ -24,8 +24,9 @@ public class SudokuADT {
      * Creates a sudocu game field based on given difficulty
      * @param diff difficulty of the game
      */
-    public SudokuNotADT(int diff) {
+    public SudokuADT(int diff) {
         //creates a sudoku field with specified difficulty
+        difficulty = diff;
         isSolveable = true;
         isSolved = false;
     }

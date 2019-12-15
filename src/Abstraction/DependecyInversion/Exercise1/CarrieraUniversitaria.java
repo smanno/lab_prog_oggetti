@@ -1,11 +1,11 @@
 package Abstraction.DependecyInversion.Exercise1;
 
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
-
-import lombok.Setter;
 
 /**
  * rappresenta l'elenco degli esami fatti e la data di iscrizione e laurea (se

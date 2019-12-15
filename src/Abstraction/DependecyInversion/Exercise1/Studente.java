@@ -1,11 +1,11 @@
 package Abstraction.DependecyInversion.Exercise1;
 
-import java.time.LocalDate;
-import java.util.stream.Collectors;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 /**
  * rappresenta uno studente dell'universita'
