@@ -1,9 +1,30 @@
 <component name="libraryTable">
   <library name="commons-codec-1.11">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/commons-codec-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/fluent-hc-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-cache-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-osgi-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-win-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpcore-4.4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/httpmime-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/jna-4.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/lib del prof/jna-platform-4.5.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/commons-codec-1.11.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/commons-logging-1.2.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/fluent-hc-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-cache-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-osgi-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpclient-win-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpcore-4.4.12.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/httpmime-4.5.10.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/jna-4.5.2.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/Lib/lib del prof/jna-platform-4.5.2.jar!/" recursive="false" />
   </library>
 </component>
